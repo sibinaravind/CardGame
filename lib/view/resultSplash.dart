@@ -29,7 +29,7 @@ class ResultSplash extends StatelessWidget {
           decoration: BoxDecoration(
             // color: Color.fromARGB(86, 0, 0, 0),
                         image: DecorationImage(
-                            image:result ? AssetImage('win.gif'):AssetImage('lost.gif'),
+                            image:result ? AssetImage('assets/win.gif'):AssetImage('assets/lost.gif'),
                             fit: BoxFit.fitWidth)
                       )
         );

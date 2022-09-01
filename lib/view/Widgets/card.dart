@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:card_game/utils.dart/utils.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 class CardDisplay extends StatelessWidget {
   String value;
    CardDisplay({Key? key, required this.value}) : super(key: key);
@@ -17,10 +19,35 @@ class CardDisplay extends StatelessWidget {
    MdiIcons.cardsDiamond,
    MdiIcons.cardsClub,
    MdiIcons.cardsSpade
-
   ];
  
-    return  value=="999"? SizedBox.shrink():SizedBox(
+    return  value=="999"? SizedBox.shrink():Device.screenType == ScreenType.mobile ?SizedBox(
+      height: 200/1.8,
+      width: 125/1.8,
+      child: Card(
+              shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+              shadowColor: Colors.white,
+              color: Colors.white,
+              elevation: 30,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                  Column(
+                    children:[Text(values[number].toString(),style: TextStyle(fontWeight: FontWeight.w900,fontSize: 17,color: clr),),
+                    Icon(symbols2[type],color: clr,size: 12)],
+                    ),
+                     Expanded(child:Icon(symbols2[type],size: 18,color: clr,) ),
+                    Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children:[Icon(symbols2[type],color: clr,size: 12),Text(values[number].toString(),style: TextStyle(fontWeight: FontWeight.w900,fontSize: 17,color: clr),),
+                    ]
+                    ),
+                ],),
+              )
+            ),
+    ):SizedBox(
       height: 200,
       width: 125,
       child: Card(

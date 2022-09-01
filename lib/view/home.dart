@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/controller.dart';
 import 'Widgets/widgets.dart';
-
+import 'package:audioplayers/audioplayers.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -15,80 +15,78 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final musicplayer= AudioCache();
   final textcont = Get.put(TextController());
   int player = 1;
   int wh = 1;
   bool buttondis = false;
-  List cards = ["11", "111"];
-  // List cards = [
-  //   "11",
-  //   "12",
-  //   "13",
-  //   "14",
-  //   "15",
-  //   "16",
-  //   "17",
-  //   "18",
-  //   "19",
-  //   "110",
-  //   "111",
-  //   "112",
-  //   "113",
-  //   "21",
-  //   "22",
-  //   "23",
-  //   "24",
-  //   "25",
-  //   "26",
-  //   "27",
-  //   "28",
-  //   "29",
-  //   "210",
-  //   "211",
-  //   "212",
-  //   "213",
-  //   "31",
-  //   "32",
-  //   "33",
-  //   "34",
-  //   "35",
-  //   "36",
-  //   "37",
-  //   "38",
-  //   "39",
-  //   "310",
-  //   "311",
-  //   "312",
-  //   "313",
-  //   "41",
-  //   "42",
-  //   "43",
-  //   "44",
-  //   "45",
-  //   "46",
-  //   "47",
-  //   "48",
-  //   "49",
-  //   "410",
-  //   "411",
-  //   "412",
-  //   "413"
-  // ];
+
+  List cards = [
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "110",
+    "111",
+    "112",
+    "113",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "210",
+    "211",
+    "212",
+    "213",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "310",
+    "311",
+    "312",
+    "313",
+    "41",
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "410",
+    "411",
+    "412",
+    "413"
+  ];
   @override
   void initState() {
     super.initState();
-    // Navigator.push(context,  
-    //         MaterialPageRoute(builder:  
-    //             (context) => LoginSplash()  
-    //         )  
-    //      );
+     textcont.player1.value="999";
+      textcont.player2.value="999";
     cards.shuffle();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 3, 118, 7),
+      backgroundColor: AppColors.maincolor,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -186,6 +184,7 @@ class _HomePageState extends State<HomePage> {
     for (int i = 0; i < 52; i++) {
       Future.delayed(Duration(seconds: 1 + 5 * i), () {
         player == 1 ? textcont.selected1.toggle() : textcont.selected2.toggle();
+        musicplayer.play('music.mp3');
       });
       Future.delayed(Duration(seconds: 2 + 5 * i), () {
         player == 1
@@ -199,7 +198,7 @@ class _HomePageState extends State<HomePage> {
       Future.delayed(Duration(seconds: 5 + 5 * i), () {
         player == 1 ? textcont.visible1.toggle() : textcont.visible2.toggle();
         if (cards[i].substring(1) == "11") {
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) =>
